@@ -3,8 +3,8 @@ spring:
     name: cardatabase
   datasource:
     url: jdbc:postgresql://localhost:5432/postgres?currentSchema=cardatabase
-    username: postgres
-    password: Welcome1!
+    username: {datasource_username}
+    password: {datasource_password}
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     generate-ddl: true
