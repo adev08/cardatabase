@@ -1,0 +1,8 @@
+
+
+# Ignores all files ending in .yml or yaml 
+*.yml
+*.yaml
+
+# Ignore properites file for this repo
+/application.yaml
