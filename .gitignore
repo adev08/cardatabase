@@ -1,0 +1,6 @@
+/.gradle/
+/build/
+
+# Ignore all .yml and .yaml files
+*.yml
+*.yaml

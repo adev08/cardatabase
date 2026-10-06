@@ -2,20 +2,26 @@ spring:
   application:
     name: cardatabase
   datasource:
-    url: jdbc:postgresql://localhost:5432/postgres?currentSchema=cardatabase
-    username: postgres
-    password: Welcome1!
+    url: jdbc:postgresql://localhost:5432/dev-db?currentSchema=cardatabase
+    username: admin
+    password: Sup3rSecr3tP@ssw0rd
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     generate-ddl: true
     show-sql: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: none #update
     properties:
       hibernate:
         globally_quoted_identifiers: true
         dialet: org.hibarnate.dialet.PostgreSQLDialect
         format_sql: true
+  flyway:
+   enabled: true
+   schemas: cardatabase
+   create-schemas: true
+   locations: classpath:db/migration
+   baseline-on-migrate: true # Recommended if you already have tables in the DB
   servelet:
     multipart:
       enable: true

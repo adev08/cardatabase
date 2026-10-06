@@ -5,7 +5,6 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
-import demo.app.cardatabase.entity.Car;
 import demo.app.cardatabase.mapper.CarMapper;
 import demo.app.cardatabase.model.CarDto;
 import demo.app.cardatabase.repository.CarRepository;
@@ -21,7 +20,7 @@ public class CarService {
 	private final CarRepository carRepository;
 	private final CarMapper carMapper;
 
-	 public CarDto getCarId(Long id) {
+	 public CarDto getCar(Long id) {
 	        return carRepository.findById(id)
 	        		.map(carMapper::toDto)
 	        		.orElseThrow(() -> new EntityNotFoundException("Car not found with id: " + id));
