@@ -3,9 +3,8 @@ package demo.app.cardatabase.model;
 
 import java.io.Serializable;
 
+import demo.app.cardatabase.entity.CarOwner;
 import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -25,5 +24,10 @@ public class CarDto implements Serializable {
 	private String registrationNumber;
 	private int modelYear;
 	private int price;
+
+	private Long carOwnerId;
+	private Long ownerId;
+    private String ownerFirstName;
+    private String ownerLastName;
 
 }

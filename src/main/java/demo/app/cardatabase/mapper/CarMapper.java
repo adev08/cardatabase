@@ -18,6 +18,10 @@ public class CarMapper {
 		dto.setRegistrationNumber(car.getRegistrationNumber());
 		dto.setModelYear(car.getModelYear());
 		dto.setPrice(car.getPrice());
+		dto.setCarOwnerId(car.getCarOwner().getId());
+		dto.setOwnerId(car.getCarOwner().getOwner().getId());
+		dto.setOwnerFirstName(car.getCarOwner().getOwner().getFirstName());
+		dto.setOwnerLastName(car.getCarOwner().getOwner().getLastName());
 		
 		return dto;
 	}
@@ -31,6 +35,7 @@ public class CarMapper {
 		car.setRegistrationNumber(dto.getRegistrationNumber());
 		car.setModelYear(dto.getModelYear());
 		car.setPrice(dto.getPrice());
+		// car.setCarOwner();
 		
 		return car;
 	}

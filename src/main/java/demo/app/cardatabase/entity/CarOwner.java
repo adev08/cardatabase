@@ -1,5 +1,6 @@
 package demo.app.cardatabase.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -12,21 +13,18 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Data
 @Entity
-@Table(name = "car")
+@Table(name = "car_owner")
 @EqualsAndHashCode(callSuper = true)
-public class Car extends BaseEntity {
+public class CarOwner extends BaseEntity  {
+
+	private static final long serialVersionUID = 1L;
 	
-	private static final long serialVersionUID = -7742475933205612429L;
-	
-	private String brand;
-	private String model;
-	private String color;
-	private String registrationNumber;
-	private int modelYear;
-	private int price;
-		
 	@OneToOne
-	@JoinColumn(name = "car_owner_id")
-	private CarOwner carOwner;
+    @JoinColumn(name = "ownerId")
+    private Owner owner;
+
+	@JsonIgnore
+	@OneToOne(mappedBy = "carOwner")
+	private Car car;
 
 }
