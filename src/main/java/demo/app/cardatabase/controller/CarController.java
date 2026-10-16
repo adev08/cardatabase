@@ -1,8 +1,12 @@
 package demo.app.cardatabase.controller;
 
+import java.net.URI;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,6 +28,12 @@ public class CarController {
 	  @Operation(summary = "Retrieve a Car by ID", description = "Fetches car details based on the provided ID.")
 	    public ResponseEntity<CarDto> getCard(@PathVariable(value = "id") Long id) {
 	        return ResponseEntity.ok().body(carService.getCar(id));
+	    }
+	  
+	   @PostMapping
+	    public ResponseEntity<CarDto> createContact(@RequestBody CarDto carDto) {
+	        return ResponseEntity.ok().body(carService.createCar(carDto));
+	        // return ResponseEntity.created(URI.create("/contacts/userID")).body(carService.createCar(carDto));
 	    }
 
 }

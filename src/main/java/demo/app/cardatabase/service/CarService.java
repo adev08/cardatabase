@@ -33,6 +33,12 @@ public class CarService {
 				 .map(carMapper::toDto)
 				 .collect(Collectors.toList());
 	 }
+
+
+	 public CarDto createCar(CarDto carDto) {
+		// TODO Auto-generated method stub
+		return null;
+	 }
 	 
 	 //TODO: CRUD operations
 }
