@@ -3,7 +3,6 @@ package demo.app.cardatabase.model;
 
 import java.io.Serializable;
 
-import demo.app.cardatabase.entity.CarOwner;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
