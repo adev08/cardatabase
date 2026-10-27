@@ -1,9 +1,13 @@
 package demo.app.cardatabase.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -19,12 +23,21 @@ public class CarOwner extends BaseEntity  {
 
 	private static final long serialVersionUID = 1L;
 	
-	@OneToOne
-    @JoinColumn(name = "ownerId")
-    private Owner owner;
+	/*
+	 * @OneToOne
+	 * 
+	 * @JoinColumn(name = "ownerId") private Owner owner;
+	 * 
+	 * @JsonIgnore
+	 * 
+	 * @OneToOne(mappedBy = "carOwner") private Car car;
+	 */
 
-	@JsonIgnore
-	@OneToOne(mappedBy = "carOwner")
-	private Car car;
+	  @OneToOne
+	    @JoinColumn(name = "ownerId")
+	    private Owner owner;
 
+	    @JsonIgnore
+	    @OneToMany(mappedBy = "carOwner")
+	    private List<Car> cars = new ArrayList<>();
 }

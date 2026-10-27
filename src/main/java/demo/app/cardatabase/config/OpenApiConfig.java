@@ -8,9 +8,8 @@ import io.swagger.v3.oas.models.info.Info;
 
 @Configuration
 public class OpenApiConfig {
-
-	/*
-	 * @Bean public OpenAPI carDatabaseOpenAPI() { return new OpenAPI() .info(new
-	 * Info) .title("") .description("") .version("1.0"); }
-	 */
+	@Bean
+	public OpenAPI carDatabaseOpenAPI() {
+		return new OpenAPI().info(new Info().title("Car REST API").description("My car stock").version("1.0"));
+	}
 }

@@ -17,10 +17,10 @@ public interface CarRepository  extends JpaRepository<Car, Long> {
 	List<Car> findByColor(String color);
 	
 	// Fetch by model year
-	List<Car> findByModelYear(String modelYear);
+	List<Car> findByModelYear(Long modelYear);
 	
 	// Fetch cars by brand and model
-	List<Car> findByBrandAndModelYear(String brand, String modelYear);
+	List<Car> findByBrandAndModelYear(String brand, Long modelYear);
 	
 	// Fetch cars by brand and color
 	List<Car> findByBrandAndColor(String brand, String color);

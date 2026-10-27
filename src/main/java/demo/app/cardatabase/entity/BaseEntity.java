@@ -21,8 +21,8 @@ public abstract class BaseEntity implements Serializable, Cloneable { // IBaseEn
 	private static final long serialVersionUID = -3592855008539127053L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name = "id", nullable = true)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", nullable = false)
 	private Long id;
 	
 	@CreationTimestamp
