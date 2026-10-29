@@ -69,40 +69,60 @@ public class CarService {
         return carMapper.toDto(savedCar);
     }
 
-    public CarDto updateCar(CarDto updateCar, Long carId) {
-        Car car = carRepository.findById(carId)
+
+public CarDto updateCar(CarDto updateCar, Long carId) {
+    Car car = carRepository.findById(carId)
+            .orElseThrow(() ->
+                new EntityNotFoundException(
+                    "Car not found with id: " + carId
+                )
+            );
+
+    // Update only fields that have new values
+    if (updateCar.getBrand() != null) {
+        car.setBrand(updateCar.getBrand());
+    }
+
+    if (updateCar.getModel() != null) {
+        car.setModel(updateCar.getModel());
+    }
+
+    if (updateCar.getColor() != null) {
+        car.setColor(updateCar.getColor());
+    }
+
+    if (updateCar.getRegistrationNumber() != null) {
+        car.setRegistrationNumber(
+            updateCar.getRegistrationNumber()
+        );
+    }
+
+    if (updateCar.getModelYear() != null) {
+        car.setModelYear(updateCar.getModelYear());
+    }
+
+    if (updateCar.getPrice() != null) {
+        car.setPrice(updateCar.getPrice());
+    }
+
+    if (updateCar.getCarOwnerId() != null) {
+        CarOwner carOwner = carOwnerRepository
+                .findById(updateCar.getCarOwnerId())
                 .orElseThrow(() ->
                     new EntityNotFoundException(
-                        "Car not found with id: " + carId
+                        "CarOwner not found with id: "
+                        + updateCar.getCarOwnerId()
                     )
                 );
 
-        car.setBrand(updateCar.getBrand());
-        car.setModel(updateCar.getModel());
-        car.setColor(updateCar.getColor());
-        car.setRegistrationNumber(
-                updateCar.getRegistrationNumber()
-        );
-        car.setModelYear(updateCar.getModelYear());
-        car.setPrice(updateCar.getPrice());
-
-        if (updateCar.getCarOwnerId() != null) {
-            CarOwner carOwner = carOwnerRepository
-                    .findById(updateCar.getCarOwnerId())
-                    .orElseThrow(() ->
-                        new EntityNotFoundException(
-                            "CarOwner not found with id: "
-                            + updateCar.getCarOwnerId()
-                        )
-                    );
-
-            car.setCarOwner(carOwner);
-        }
-
-        Car updatedCar = carRepository.save(car);
-
-        return carMapper.toDto(updatedCar);
+        car.setCarOwner(carOwner);
     }
+
+    Car updatedCar = carRepository.save(car);
+
+    return carMapper.toDto(updatedCar);
+}
+
 
     public boolean deleteCar(Long carId) {
         if (!carRepository.existsById(carId)) {
