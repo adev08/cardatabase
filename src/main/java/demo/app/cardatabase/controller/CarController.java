@@ -1,3 +1,4 @@
+
 package demo.app.cardatabase.controller;
 
 import org.springframework.http.ResponseEntity;
@@ -12,36 +13,58 @@ import org.springframework.web.bind.annotation.RestController;
 
 import demo.app.cardatabase.model.CarDto;
 import demo.app.cardatabase.service.CarService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/api/cars")
+@RequestMapping("/api/car")
 @RequiredArgsConstructor
+@Tag(name = "Car API", description = "Endpoints for managing cars")
 public class CarController {
 
-	private final CarService carService;
+    private final CarService carService;
 
-	@GetMapping("/{id}")
-	public ResponseEntity<CarDto> getCardById(@PathVariable Long id) {
-		return ResponseEntity.ok(carService.getCarId(id));
-	}
+    @GetMapping("/{id}")
+    @Operation(
+        summary = "Retrieve a car by ID",
+        description = "Fetches car details based on the provided ID."
+    )
+    public ResponseEntity<CarDto> getCar(
+            @PathVariable("id") Long id) {
 
-	/*
-	 * 
-	 * @PutMapping("/{id}") public String updateUser(@PathVariable String
-	 * id, @RequestBody String userData) { return "User updated: " + id; }
-	 */
+        return ResponseEntity.ok(carService.getCar(id));
+    }
 
-	@PostMapping
-	public ResponseEntity<CarDto> createCar(@RequestBody CarDto carDTO) {
-		CarDto createdCar = carService.saveCar(carDTO);
-		return ResponseEntity.ok(createdCar);
-	}
+    @PostMapping
+    public ResponseEntity<CarDto> createCar(
+            @Valid @RequestBody CarDto carDto) {
 
-	@DeleteMapping("/{id}")
-	public ResponseEntity<Void> deleteCar(@PathVariable Long id) {
-		carService.deleteCar(id);
-		return ResponseEntity.noContent().build();
-	}
+        CarDto createdCar = carService.createCar(carDto);
+        return ResponseEntity.status(201).body(createdCar);
+    }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<CarDto> updateCar(
+            @Valid @RequestBody CarDto updateCar,
+            @PathVariable("id") Long carId) {
+
+        return ResponseEntity.ok(
+            carService.updateCar(updateCar, carId)
+        );
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Boolean> deleteCarById(
+            @PathVariable("id") Long carId) {
+
+        Boolean deleted = carService.deleteCar(carId);
+
+        if (deleted) {
+            return ResponseEntity.ok(true);
+        }
+
+        return ResponseEntity.notFound().build();
+    }
 }

@@ -1,6 +1,9 @@
 package demo.app.cardatabase.entity;
 
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -19,9 +22,16 @@ public class Car extends BaseEntity {
 	private String model;
 	private String color;
 	private String registrationNumber;
-	private int modelYear;
-	private int price;
-	
-	//TODO: relationships
+	private Long modelYear;
+	private Double price;
+		
+	/*
+	 * @OneToOne
+	 * 
+	 * @JoinColumn(name = "car_owner_id") private CarOwner carOwner;
+	 */
 
+	 @ManyToOne
+	    @JoinColumn(name = "car_owner_id")
+	    private CarOwner carOwner;
 }
