@@ -34,6 +34,18 @@ public class CarService {
 				 .map(carMapper::toDto)
 				 .collect(Collectors.toList());
 	 }
+
+
+	 public void deleteCar(Long id) {
+		// TODO Auto-generated method stub
+		
+	 }
+
+
+	 public CarDto saveCar(CarDto carDTO) {
+		// TODO Auto-generated method stub
+		return null;
+	 }
 	 
 	 //TODO: CRUD operations
 }
